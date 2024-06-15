@@ -62,7 +62,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .width((256.dp))
+                    .fillMaxWidth()
                     .height(140.dp)
             ) {
                 Row(
@@ -82,17 +82,14 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center
                 )
+                Spacer(modifier = Modifier.height(40.dp))
             }
-            Spacer(modifier = Modifier.height(10.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 45.dp)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                     colors = CardDefaults.cardColors(Color.White)
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
@@ -155,7 +152,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                             )
                         }
                     )
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(32.dp))
 
                     DefaultButton(
                         onClick = {
