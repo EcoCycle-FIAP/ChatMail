@@ -25,7 +25,7 @@ fun DefaultButton(
     contentFontSize: Int,
     containerColor: Int? = R.color.primary_color,
     contentColor: Int? = R.color.chatmail_white_color,
-    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(defaultElevation = 10.dp),
+    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(defaultElevation = 2.5.dp),
     contentPadding: PaddingValues? = ButtonDefaults.ContentPadding
 ) {
     OutlinedButton(
