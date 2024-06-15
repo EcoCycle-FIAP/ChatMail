@@ -9,5 +9,6 @@
     <color name="chatmail_red_color">#FFBE0E0E</color>
     <color name="chatmail_yellow_color">#FFFFC107</color>
     <color name="chatmail_gray_color">#FF7B7B7B</color>
+    <color name="chatmail_white_color">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
 </resources>
