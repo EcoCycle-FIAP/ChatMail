@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.fiap.chatmail.components.TabBar
 import br.com.fiap.chatmail.screens.signupandsignin.components.SignInScreen
 import br.com.fiap.chatmail.screens.signupandsignin.components.SignUpScreen
 
@@ -11,7 +12,7 @@ import br.com.fiap.chatmail.screens.signupandsignin.components.SignUpScreen
 fun SignInAndSignUpScreen() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "sign_up") {
+    NavHost(navController = navController, startDestination = "sign_in") {
         composable(route = "sign_in") {
             SignInScreen(
                 navController = navController,
@@ -23,6 +24,9 @@ fun SignInAndSignUpScreen() {
                 navController = navController,
                 signUpScreenViewModel = SignUpScreenViewModel()
             )
+        }
+        composable(route = "mailbox"){
+            TabBar()
         }
     }
 }
