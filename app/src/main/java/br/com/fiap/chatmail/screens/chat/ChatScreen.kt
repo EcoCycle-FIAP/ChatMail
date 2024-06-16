@@ -40,6 +40,7 @@ fun ChatScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = 50.dp)
             .background(colorResource(id = R.color.background_color))
     ) {
         Column(
@@ -195,10 +196,4 @@ fun MessageCard(message: String, isSentByUser: Boolean, timestamp: String) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun ChatScreenPreview() {
-    ChatScreen()
 }
