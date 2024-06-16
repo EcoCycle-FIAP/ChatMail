@@ -1,27 +1,36 @@
 package br.com.fiap.chatmail.screens.calendar
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import br.com.fiap.chatmail.R
+import br.com.fiap.chatmail.components.TabBar
+import br.com.fiap.chatmail.screens.calendar.components.CalendarHeader
+import br.com.fiap.chatmail.screens.calendar.components.CalendarView
+import br.com.fiap.chatmail.screens.calendar.components.TaskList
+
 
 @Composable
-fun CalendarScreen() {
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
+fun CalendarScreen(navController: NavController) {
+    Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 20.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceBetween
-    ){
-        Text(text = "Tela de Calendário")
+            .background(colorResource(id = R.color.background_color))
+    ) {
+        Column {
+            TabBar(navController = navController)
+            CalendarHeader()
+            CalendarView()
+            Spacer(modifier = Modifier.height(16.dp))
+            TaskList(navController)
+        }
     }
 }
