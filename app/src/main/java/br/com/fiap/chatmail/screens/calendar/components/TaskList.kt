@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,21 +31,21 @@ fun TaskList(navController: NavController) {
         mutableStateOf(
             listOf(
                 Task(
-                    "1 de fevereiro de 2024", "blablablablablablablablabla", "01/02"
+                    "1 de fevereiro de 2024", "Reunião com a equipe de desenvolvimento", "01/02"
                 ),
-
                 Task(
-                    "2 de fevereiro de 2024", "blablablablablablablabla", "02/02"
+                    "2 de fevereiro de 2024", "Revisão de código para o novo módulo", "02/02"
                 ),
-
                 Task(
-                    "3 de fevereiro de 2024", "Modificações no sistema da empresa", "HOJE"
-                ),
+                    "3 de fevereiro de 2024", "Implementar modificações no sistema legado da empresa - modernização", "HOJE"
+                )
             )
         )
     }
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .verticalScroll(rememberScrollState())) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
