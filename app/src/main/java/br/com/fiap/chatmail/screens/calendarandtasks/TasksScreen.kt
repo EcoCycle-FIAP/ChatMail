@@ -30,7 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun Tarefas(navController: NavController) {
+fun TasksScreen(navController: NavController) {
     val tasks = generateTasks()
 
     Box(modifier = Modifier
@@ -147,5 +147,5 @@ private fun generateTasks(): List<Task> {
 @Preview
 @Composable
 private fun TasksPreview() {
-    Tarefas(navController = rememberNavController())
+    TasksScreen(navController = rememberNavController())
 }
