@@ -10,7 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import br.com.fiap.chatmail.screens.signupandsignin.SignInAndSignUpScreen
+import br.com.fiap.chatmail.routing.NavigationCenter
 import br.com.fiap.chatmail.ui.theme.ChatMailTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize().padding(bottom = 75.dp),
                     color = colorResource(id = R.color.chatmail_white_color)
                 ) {
-                    SignInAndSignUpScreen()
+                    NavigationCenter()
                 }
             }
         }

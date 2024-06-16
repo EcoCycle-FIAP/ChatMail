@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import br.com.fiap.chatmail.components.TabBar
 
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(navController: NavController) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -22,6 +24,7 @@ fun FavoritesScreen() {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.SpaceBetween
     ){
+        TabBar(navController = navController)
         Text(text = "Tela de Favoritos")
     }
 }
