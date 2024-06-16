@@ -63,7 +63,6 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -77,12 +76,13 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                         fontFamily = Inika
                     )
                 }
-                Text(
-                    text = "Crie sua conta e mande emails como manda mensagens",
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(40.dp))
+                Box(modifier = Modifier.width(300.dp)) {
+                    Text(
+                        text = "Crie sua conta e mande emails como manda mensagens",
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
