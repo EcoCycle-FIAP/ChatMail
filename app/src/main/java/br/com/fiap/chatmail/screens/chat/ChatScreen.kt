@@ -1,4 +1,4 @@
-package br.com.fiap.chatmail.screens.chatscreenmail
+package br.com.fiap.chatmail.screens.chat
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,8 +25,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,13 +40,13 @@ fun ChatScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(colorResource(id = R.color.background_color))
     ) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(16.dp)
-                .background(color = Color.White),
+                .background(color = colorResource(id = R.color.background_color)),
             verticalArrangement = Arrangement.SpaceBetween,
 
             ) {
@@ -65,7 +65,7 @@ fun ChatScreen() {
                 Box(
                     modifier = Modifier
                         .size(56.dp)
-                        .background(Color.LightGray, RoundedCornerShape(28.dp))
+                        .background(colorResource(id = R.color.chatmail_lightgray_color), RoundedCornerShape(28.dp))
                         .padding(16.dp)
                 ) {
                     // Send button placeholder
@@ -76,7 +76,7 @@ fun ChatScreen() {
                         modifier = Modifier
                             .clickable { }
                             .size(50.dp),
-                        colorFilter = ColorFilter.tint(Color.Gray)
+                        colorFilter = ColorFilter.tint(colorResource(id = R.color.chatmail_gray_color))
                     )
                 }
 
@@ -85,19 +85,19 @@ fun ChatScreen() {
                         .weight(1f)
                         .padding(8.dp)
                         .height(56.dp)
-                        .background(Color.LightGray, RoundedCornerShape(8.dp))
+                        .background(colorResource(id = R.color.chatmail_lightgray_color), RoundedCornerShape(8.dp))
                 ) {
                     // Input area placeholder
                     Text(
                         text = "Digite aqui...",
-                        color = Color.Gray,
+                        color = colorResource(id = R.color.chatmail_gray_color),
                         modifier = Modifier.padding(start = 16.dp, top = 16.dp)
                     )
                 }
                 Box(
                     modifier = Modifier
                         .size(56.dp)
-                        .background(Color.Blue, RoundedCornerShape(28.dp))
+                        .background(color = colorResource(id = R.color.primary_color), RoundedCornerShape(28.dp))
                         .padding(16.dp)
                 ) {
                     // Send button placeholder
@@ -108,7 +108,7 @@ fun ChatScreen() {
                         modifier = Modifier
                             .clickable { }
                             .size(50.dp),
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(colorResource(id = R.color.chatmail_white_color))
                     )
                 }
             }
@@ -136,7 +136,7 @@ fun UserInfoHeader() {
             contentDescription = "Foto de Daniel Clemente",
             modifier = Modifier
                 .size(40.dp)
-                .background(Color.White, CircleShape)
+                .background(colorResource(id = R.color.chatmail_white_color), CircleShape)
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
@@ -144,16 +144,16 @@ fun UserInfoHeader() {
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
             modifier = Modifier.weight(1f),
-            color = Color.Black
+            color = colorResource(id = R.color.chatmail_black_color)
         )
     }
 }
 
 @Composable
 fun MessageCard(message: String, isSentByUser: Boolean, timestamp: String) {
-    val backgroundColor = if (isSentByUser) Color(0xFF007AFF) else Color.LightGray
+    val backgroundColor = if (isSentByUser) colorResource(id = R.color.primary_color) else colorResource(id = R.color.chatmail_lightgray_color)
     val alignment = if (isSentByUser) Alignment.End else Alignment.Start
-    val textColor = if (isSentByUser) Color.White else Color.Black
+    val textColor = if (isSentByUser) colorResource(id = R.color.chatmail_white_color) else colorResource(id = R.color.chatmail_black_color)
 
     Column(
         horizontalAlignment = alignment,
@@ -164,7 +164,7 @@ fun MessageCard(message: String, isSentByUser: Boolean, timestamp: String) {
                 Text(
                     text = timestamp,
                     fontSize = 15.sp,
-                    color = Color.Gray,
+                    color = colorResource(id = R.color.chatmail_gray_color),
                     modifier = Modifier.padding(start = 140.dp, top = 20.dp)
                 )
             }
@@ -190,7 +190,7 @@ fun MessageCard(message: String, isSentByUser: Boolean, timestamp: String) {
                     painter = painterResource(id = R.drawable.share),
                     contentDescription = "Veja mais",
                     modifier = Modifier.size(24.dp),
-                    colorFilter = if (isSentByUser) ColorFilter.tint(Color.White) else null
+                    colorFilter = if (isSentByUser) ColorFilter.tint(colorResource(id = R.color.chatmail_white_color)) else null
                 )
             }
         }

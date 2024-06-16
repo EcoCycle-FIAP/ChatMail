@@ -1,4 +1,4 @@
-package br.com.fiap.chatmail.screens.signupandsignin.components
+package br.com.fiap.chatmail.screens.signin
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,11 +23,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -35,21 +33,18 @@ import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.components.ChatMailLogo
 import br.com.fiap.chatmail.components.DefaultButton
 import br.com.fiap.chatmail.components.DefaultTextInput
-import br.com.fiap.chatmail.screens.signupandsignin.SignUpScreenViewModel
 import br.com.fiap.chatmail.ui.theme.Inika
 
 @Composable
-fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScreenViewModel) {
+fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScreenViewModel) {
 
-    val name by signUpScreenViewModel.name.observeAsState("")
-    val email by signUpScreenViewModel.email.observeAsState("")
-    val password by signUpScreenViewModel.password.observeAsState("")
-    val passwordConfirmation by signUpScreenViewModel.passwordConfirmation.observeAsState("")
+    val email by signInScreenViewModel.email.observeAsState(initial = "")
+    val password by signInScreenViewModel.password.observeAsState(initial = "")
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(colorResource(id = R.color.background_color))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,6 +58,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(140.dp)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -71,18 +67,13 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                     ChatMailLogo()
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
-                        text = "ChatMail",
-                        fontSize = 32.sp,
-                        fontFamily = Inika
+                        text = "ChatMail", fontSize = 32.sp, fontFamily = Inika
                     )
                 }
-                Box(modifier = Modifier.width(300.dp)) {
-                    Text(
-                        text = "Crie sua conta e mande emails como manda mensagens",
-                        fontSize = 16.sp,
-                        textAlign = TextAlign.Center
-                    )
-                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Entre na sua conta para continuar", fontSize = 16.sp
+                )
             }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,81 +81,52 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
             ) {
                 Card(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    colors = CardDefaults.cardColors(Color.White)
+                    colors = CardDefaults.cardColors(colorResource(id = R.color.chatmail_white_color))
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
-                    DefaultTextInput(
-                        label = "Nome Completo",
-                        placeholder = "Digite seu nome completo",
-                        value = name,
-                        onValueChange = {
-                            signUpScreenViewModel.onNameChanged(it)
-                        },
-                        trailingIcon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.account_box_24),
-                                contentDescription = "Ícone de perfil"
-                            )
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Email",
+                    DefaultTextInput(label = "Email",
                         placeholder = "Digite seu email",
                         value = email,
-                        onValueChange = {
-                            signUpScreenViewModel.onEmailChanged(it)
-                        },
+                        onValueChange = { signInScreenViewModel.onEmailChanged(it) },
                         trailingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.mail_icon),
                                 contentDescription = "Ícone de email"
                             )
-                        }
-                    )
+                        })
                     Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Senha",
+                    DefaultTextInput(label = "Senha",
                         placeholder = "Digite sua senha",
                         value = password,
-                        onValueChange = {
-                            signUpScreenViewModel.onPasswordChanged(it)
-                        },
+                        onValueChange = { signInScreenViewModel.onPasswordChanged(it) },
                         trailingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.eye_icon),
                                 contentDescription = "Ícone de olho"
                             )
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Confirmar senha",
-                        placeholder = "Digite novamente sua senha",
-                        value = passwordConfirmation,
-                        onValueChange = {
-                            signUpScreenViewModel.onPasswordConfirmationChanged(it)
-                        },
-                        trailingIcon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.eye_icon),
-                                contentDescription = "Ícone de olho"
-                            )
-                        }
-                    )
+                        })
+
                     Spacer(modifier = Modifier.height(32.dp))
 
                     DefaultButton(
                         onClick = {
-                            navController.navigate("login")
-                        },
-                        text = "Cadastrar",
-                        contentFontSize = 16
+                            navController.navigate("mailbox")
+                        }, text = "Entrar", contentFontSize = 16
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        "Esqueceu a senha?",
+                        modifier = Modifier.padding(vertical = 8.dp).align(Alignment.CenterHorizontally),
+                        color = colorResource(
+                            id = R.color.primary_color
+                        ),
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }
         }
 
+        //Footer
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -173,20 +135,16 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
         ) {
             Spacer(modifier = Modifier.weight(1f))
             Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+                horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Já possui uma conta? ")
-                Text(
-                    "Entrar",
+                Text("Não tem uma conta ainda? ")
+                Text("Cadastre-se",
                     color = colorResource(id = R.color.primary_color),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable {
-                        navController.navigate("sign_in")
-                    }
-                )
+                        navController.navigate("signup")
+                    })
             }
         }
     }
-
 }

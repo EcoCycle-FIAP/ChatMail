@@ -1,4 +1,4 @@
-package br.com.fiap.chatmail.screens.signupandsignin
+package br.com.fiap.chatmail.screens.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -4,12 +4,13 @@
     <color name="primary_color">#FF217CBD</color>
     <color name="input_background">#FFEDEDED</color>
     <color name="modal_background">#FFF6F6F6</color>
-    <color name="email_card_backgrond">#FFF4F4F4</color>
+    <color name="chatmail_lightgray_color">#FFF4F4F4</color>
     <color name="chatmail_green_color">#FF008D52</color>
     <color name="chatmail_cyan_color">#FF00748D</color>
     <color name="chatmail_red_color">#FFBE0E0E</color>
     <color name="chatmail_yellow_color">#FFFFC107</color>
     <color name="chatmail_gray_color">#FF7B7B7B</color>
     <color name="chatmail_white_color">#FFFFFFFF</color>
+    <color name="chatmail_black_color">#FF000000</color>
     <color name="transparent">#00000000</color>
 </resources>
