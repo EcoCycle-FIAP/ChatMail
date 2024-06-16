@@ -22,7 +22,7 @@ import br.com.fiap.chatmail.R
 
 
 @Composable
-fun Tasks(navController: NavController) {
+fun CalendarScreen(navController: NavController) {
     val tasks by remember { mutableStateOf(listOf(
         Task("1 de fevereiro de 2024",
             "blablablablablablablablabla",
@@ -231,5 +231,5 @@ fun TaskItem(task: Task) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    Tasks(navController = rememberNavController())
+    CalendarScreen(navController = rememberNavController())
 }
