@@ -78,7 +78,7 @@ fun ChatScreenSending() {
                 // You can replace it with an actual icon if needed
                 Image(
                     painter = painterResource(id = R.drawable.paper_clip),
-                    contentDescription = "Next Month",
+                    contentDescription = "Paper Clip",
                     modifier = Modifier
                         .clickable { }
                         .size(50.dp),
@@ -110,7 +110,7 @@ fun ChatScreenSending() {
                 // You can replace it with an actual icon if needed
                 Image(
                     painter = painterResource(id = R.drawable.sending),
-                    contentDescription = "Next Month",
+                    contentDescription = "Sending",
                     modifier = Modifier
                         .clickable { }
                         .size(50.dp),
