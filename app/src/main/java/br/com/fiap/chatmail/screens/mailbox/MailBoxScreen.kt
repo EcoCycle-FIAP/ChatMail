@@ -1,27 +1,19 @@
 package br.com.fiap.chatmail.screens.mailbox
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.colorResource
+import br.com.fiap.chatmail.R
+import br.com.fiap.chatmail.screens.mailbox.components.EmailCard
 
 @Composable
 fun MailBoxScreen() {
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 20.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceBetween
-    ){
-        Text(text = "Tela de Caixa de Emails")
+    LazyColumn(modifier = Modifier
+        .background(color = colorResource(id = R.color.email_card_backgrond))) {
+        items(10) {
+            EmailCard(iteration = it)
+        }
     }
 }

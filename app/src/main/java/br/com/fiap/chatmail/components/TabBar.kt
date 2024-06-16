@@ -1,6 +1,10 @@
 package br.com.fiap.chatmail.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,28 +38,20 @@ import br.com.fiap.chatmail.screens.favorites.FavoritesScreen
 import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
 
 enum class Screens {
-    Calendar,
-    MailBox,
-    Favorites
+    Calendar, MailBox, Favorites
 }
 
 data class NavItem(
-    val icon: ImageVector,
-    val route: String
+    val icon: ImageVector, val route: String
 )
 
 val listOfNavItems = listOf(
     NavItem(
-        icon = Icons.Default.DateRange,
-        route = Screens.Calendar.name
-    ),
-    NavItem(
-        icon = Icons.Default.MailOutline,
-        route = Screens.MailBox.name
-    ),
-    NavItem(
-        icon = Icons.Default.Favorite,
-        route = Screens.Favorites.name
+        icon = Icons.Default.DateRange, route = Screens.Calendar.name
+    ), NavItem(
+        icon = Icons.Default.MailOutline, route = Screens.MailBox.name
+    ), NavItem(
+        icon = Icons.Default.Favorite, route = Screens.Favorites.name
     )
 )
 
@@ -63,22 +59,24 @@ val listOfNavItems = listOf(
 fun TabBar() {
     val navController = rememberNavController()
 
-    Scaffold(modifier = Modifier.padding(top = 50.dp), topBar = {
-        NavigationBar(
-            containerColor = colorResource(id = R.color.chatmail_white_color),
-            modifier = Modifier
-                .height(100.dp)
-        ) {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
+    Scaffold(modifier = Modifier
+        .padding(top = 50.dp)
+        .background(color = colorResource(id = R.color.background_color)), topBar = {
+        Column {
+            UserHeader()
+            Spacer(modifier = Modifier.height(15.dp))
+            NavigationBar(
+                containerColor = colorResource(id = R.color.chatmail_white_color),
+                modifier = Modifier.height(100.dp)
+            ) {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
 
-            listOfNavItems.forEach { navItem ->
-                val selected =
-                    currentDestination?.hierarchy?.any { it.route == navItem.route } == true
+                listOfNavItems.forEach { navItem ->
+                    val selected =
+                        currentDestination?.hierarchy?.any { it.route == navItem.route } == true
 
-                NavigationBarItem(
-                    selected = selected,
-                    onClick = {
+                    NavigationBarItem(selected = selected, onClick = {
                         navController.navigate(navItem.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
                                 saveState = true
@@ -86,8 +84,7 @@ fun TabBar() {
                             launchSingleTop = true
                             restoreState = true
                         }
-                    },
-                    icon = {
+                    }, icon = {
                         val boxSize = 120.dp
                         val iconSize = 35.dp
                         Box(modifier = Modifier.size(boxSize)) {
@@ -102,26 +99,26 @@ fun TabBar() {
                                 color = if (selected) colorResource(id = R.color.primary_color) else colorResource(
                                     id = R.color.transparent
                                 ),
-                                thickness = 2.dp,
+                                thickness = 4.dp,
                                 modifier = Modifier
                                     .width(boxSize)
                                     .align(Alignment.BottomCenter)
                             )
                         }
-                    },
-                    colors = NavigationBarItemDefaults.colors(
+                    }, colors = NavigationBarItemDefaults.colors(
                         indicatorColor = colorResource(id = R.color.transparent)
                     )
-                )
+                    )
+                }
             }
         }
-    }
-    ) { paddingValues ->
+    }) { paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Screens.MailBox.name,
             modifier = Modifier
                 .padding(paddingValues)
+                .fillMaxSize()
         ) {
             composable(route = Screens.Calendar.name) {
                 CalendarScreen()
