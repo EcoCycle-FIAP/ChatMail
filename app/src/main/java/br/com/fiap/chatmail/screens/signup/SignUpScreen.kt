@@ -59,8 +59,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -69,9 +68,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                     ChatMailLogo()
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
-                        text = "ChatMail",
-                        fontSize = 32.sp,
-                        fontFamily = Inika
+                        text = "ChatMail", fontSize = 32.sp, fontFamily = Inika
                     )
                 }
                 Box(modifier = Modifier.width(300.dp)) {
@@ -91,8 +88,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                     colors = CardDefaults.cardColors(colorResource(id = R.color.chatmail_white_color))
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
-                    DefaultTextInput(
-                        label = "Nome Completo",
+                    DefaultTextInput(label = "Nome Completo",
                         placeholder = "Digite seu nome completo",
                         value = name,
                         onValueChange = {
@@ -103,11 +99,9 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                                 painter = painterResource(id = R.drawable.account_box_24),
                                 contentDescription = "Ícone de perfil"
                             )
-                        }
-                    )
+                        })
                     Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Email",
+                    DefaultTextInput(label = "Email",
                         placeholder = "Digite seu email",
                         value = email,
                         onValueChange = {
@@ -118,11 +112,9 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                                 painter = painterResource(id = R.drawable.mail_icon),
                                 contentDescription = "Ícone de email"
                             )
-                        }
-                    )
+                        })
                     Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Senha",
+                    DefaultTextInput(label = "Senha",
                         placeholder = "Digite sua senha",
                         value = password,
                         onValueChange = {
@@ -133,11 +125,9 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                                 painter = painterResource(id = R.drawable.eye_icon),
                                 contentDescription = "Ícone de olho"
                             )
-                        }
-                    )
+                        })
                     Spacer(modifier = Modifier.height(14.dp))
-                    DefaultTextInput(
-                        label = "Confirmar senha",
+                    DefaultTextInput(label = "Confirmar senha",
                         placeholder = "Digite novamente sua senha",
                         value = passwordConfirmation,
                         onValueChange = {
@@ -148,16 +138,14 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                                 painter = painterResource(id = R.drawable.eye_icon),
                                 contentDescription = "Ícone de olho"
                             )
-                        }
-                    )
+                        })
                     Spacer(modifier = Modifier.height(32.dp))
 
                     DefaultButton(
                         onClick = {
                             navController.navigate("login")
                         },
-                        text = "Cadastrar",
-                        contentFontSize = 16
+                        content = { Text(text = "Cadastrar", fontSize = 16.sp) },
                     )
                 }
             }
@@ -171,18 +159,15 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
         ) {
             Spacer(modifier = Modifier.weight(1f))
             Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+                horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Já possui uma conta? ")
-                Text(
-                    "Entrar",
+                Text("Entrar",
                     color = colorResource(id = R.color.primary_color),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable {
                         navController.navigate("signin")
-                    }
-                )
+                    })
             }
         }
     }
