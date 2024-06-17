@@ -1,5 +1,6 @@
 package br.com.fiap.chatmail.screens.mailbox.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,11 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.ui.theme.Jaldi
 
 @Composable
-fun EmailCard(iteration: Int) {
+fun EmailCard(iteration: Int, navController: NavController) {
 
     //Lógica para simular diferentes cores de avatares
     var avatarColor = R.color.primary_color
@@ -49,9 +51,10 @@ fun EmailCard(iteration: Int) {
 
     Column(
         modifier = Modifier
-            .padding(vertical = 5.dp, horizontal = 25.dp)
+            .padding(vertical = 10.dp, horizontal = 25.dp)
             .fillMaxWidth()
-            .height(180.dp),
+            .height(180.dp)
+            .clickable { navController.navigate("expandedemail") },
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
@@ -105,5 +108,5 @@ fun EmailCard(iteration: Int) {
             )
         )
     }
-    HorizontalDivider(color = colorResource(id = R.color.primary_color))
+    HorizontalDivider(color = colorResource(id = R.color.chatmail_gray_color), modifier = Modifier.padding(horizontal = 25.dp))
 }
