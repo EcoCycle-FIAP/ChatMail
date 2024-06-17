@@ -8,21 +8,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import br.com.fiap.chatmail.R
 
 @Composable
 fun DefaultButton(
     onClick: () -> Unit,
-    text: String,
+    content: @Composable () -> Unit,
     width: Int? = 300,
     height: Int? = 55,
-    contentFontSize: Int,
     containerColor: Int? = R.color.primary_color,
     contentColor: Int? = R.color.chatmail_white_color,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(defaultElevation = 2.5.dp),
@@ -43,6 +40,6 @@ fun DefaultButton(
         border = BorderStroke(1.dp, colorResource(id = R.color.transparent)),
         contentPadding = contentPadding ?: ButtonDefaults.ContentPadding
     ) {
-        Text(text = text, fontSize = contentFontSize.sp)
+        content()
     }
 }

@@ -52,7 +52,7 @@ fun NavigationCenter() {
             NewEmailScreen()
         }
         composable(route = Screens.ExpandedEmail.name) {
-            ExpandedEmailScreen()
+            ExpandedEmailScreen(navController)
         }
         composable(route = Screens.Chat.name){
             ChatScreen()
