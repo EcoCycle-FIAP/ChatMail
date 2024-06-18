@@ -10,6 +10,7 @@ import br.com.fiap.chatmail.screens.expandedemail.ExpandedEmailScreen
 import br.com.fiap.chatmail.screens.favorites.FavoritesScreen
 import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
 import br.com.fiap.chatmail.screens.newemail.NewEmailScreen
+import br.com.fiap.chatmail.screens.newemail.NewEmailScreenViewModel
 import br.com.fiap.chatmail.screens.signin.SignInScreen
 import br.com.fiap.chatmail.screens.signin.SignInScreenViewModel
 import br.com.fiap.chatmail.screens.signup.SignUpScreen
@@ -49,7 +50,7 @@ fun NavigationCenter() {
             TasksScreen(navController)
         }
         composable(route = Screens.NewEmail.name) {
-            NewEmailScreen()
+            NewEmailScreen(navController, newEmailScreenViewModel = NewEmailScreenViewModel())
         }
         composable(route = Screens.ExpandedEmail.name) {
             ExpandedEmailScreen(navController)

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.chatmail.R
@@ -18,13 +19,15 @@ import br.com.fiap.chatmail.R
 @Composable
 fun <T> DefaultTextInput(
     modifier: Modifier = Modifier,
+    width: Dp = 300.dp,
     value: T,
     onValueChange: (T) -> Unit,
     label: String,
     placeholder: String,
     trailingIcon: @Composable (() -> Unit)? = null,
     readOnly: Boolean = false,
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
+    singleLine: Boolean = true
 ) {
     OutlinedTextField(
         label = { Text(text = label) },
@@ -38,11 +41,11 @@ fun <T> DefaultTextInput(
             @Suppress("UNCHECKED_CAST")
             onValueChange(it as T)
         },
-        singleLine = true,
+        singleLine = singleLine,
         textStyle = TextStyle(fontSize = 16.sp),
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .width(300.dp)
+            .width(width)
             .then(modifier),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = colorResource(id = R.color.primary_color),
