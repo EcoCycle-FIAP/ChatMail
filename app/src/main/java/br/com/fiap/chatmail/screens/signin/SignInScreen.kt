@@ -108,15 +108,19 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
 
                     Spacer(modifier = Modifier.height(32.dp))
 
-                    DefaultButton(
-                        onClick = {
-                            navController.navigate("mailbox")
-                        }, text = "Entrar", contentFontSize = 16
-                    )
+                    DefaultButton(onClick = {
+                        navController.navigate("mailbox")
+                    }, content = {
+                        Column {
+                            Text(text = "Entrar", fontSize = 16.sp)
+                        }
+                    })
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         "Esqueceu a senha?",
-                        modifier = Modifier.padding(vertical = 8.dp).align(Alignment.CenterHorizontally),
+                        modifier = Modifier
+                            .padding(vertical = 8.dp)
+                            .align(Alignment.CenterHorizontally),
                         color = colorResource(
                             id = R.color.primary_color
                         ),
