@@ -55,7 +55,7 @@ fun ExpandedEmailScreen(navController: NavController) {
                             text = "Nome Do Usuário", fontSize = 18.sp, fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "XXt atrás",
+                            text = "14/09/2024, 10:36 ",
                             fontSize = 12.sp,
                             color = colorResource(id = R.color.chatmail_gray_color)
                         )
