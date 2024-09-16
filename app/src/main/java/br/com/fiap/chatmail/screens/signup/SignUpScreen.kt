@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,17 +24,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.components.ChatMailLogo
 import br.com.fiap.chatmail.components.DefaultButton
 import br.com.fiap.chatmail.components.DefaultTextInput
+import br.com.fiap.chatmail.components.LocaWebLogo
+import br.com.fiap.chatmail.screens.signin.SignInScreen
+import br.com.fiap.chatmail.screens.signin.SignInScreenViewModel
 import br.com.fiap.chatmail.ui.theme.Inika
 
 @Composable
@@ -145,12 +154,35 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
                         onClick = {
                             navController.navigate("login")
                         },
-                        content = { Text(text = "Cadastrar", fontSize = 16.sp) },
+                        content = { Text(text = "Cadastrar", fontSize = 16.sp) }
                     )
                 }
             }
         }
 
+        //Logo locaweb
+        Row(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Powered by",
+                fontSize = 13.sp,
+                color = colorResource(id = R.color.gray_locaweb)
+            )
+
+            Box(
+                modifier = Modifier
+                    .size(width = 60.dp, height = 40.dp)
+                    .clip(RectangleShape)
+            ) {
+                LocaWebLogo()
+            }
+        }
+
+        //Footer
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -163,7 +195,7 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
             ) {
                 Text("Já possui uma conta? ")
                 Text("Entrar",
-                    color = colorResource(id = R.color.primary_color),
+                    color = colorResource(id = R.color.gray_locaweb),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable {
                         navController.navigate("signin")
@@ -171,5 +203,15 @@ fun SignUpScreen(navController: NavController, signUpScreenViewModel: SignUpScre
             }
         }
     }
+}
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyComposable() {
+
+    val navController = TestNavHostController(LocalContext.current)
+
+    val fakeViewModel = SignUpScreenViewModel()
+
+    SignUpScreen(navController = navController, signUpScreenViewModel = fakeViewModel)
 }

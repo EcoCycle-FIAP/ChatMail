@@ -16,12 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.screens.expandedemail.components.ExpandedEmailFooter
 import br.com.fiap.chatmail.screens.expandedemail.components.ExpanedEmailHeader
@@ -89,4 +92,13 @@ fun ExpandedEmailScreen(navController: NavController) {
         },
         bottomBar = { ExpandedEmailFooter(navController) },
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyComposable() {
+
+    val navController = TestNavHostController(LocalContext.current)
+
+    ExpandedEmailScreen(navController = navController)
 }

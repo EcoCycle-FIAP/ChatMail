@@ -34,8 +34,7 @@ fun NewEmailFooter(navController: NavController) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            DefaultButton(width = 230,
-                height = 50,
+            DefaultButton(
                 onClick = { navController.navigate("chat") },
                 content = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -46,7 +45,10 @@ fun NewEmailFooter(navController: NavController) {
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = "Enviar")
                     }
-                })
+                },
+                width = 230,
+                height = 50
+            )
         }
     }
 }
