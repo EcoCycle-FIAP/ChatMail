@@ -12,10 +12,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
+import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
 import br.com.fiap.chatmail.screens.tasks.components.Task
 import br.com.fiap.chatmail.screens.tasks.components.TaskList
 
@@ -61,5 +65,14 @@ fun TasksScreen(navController: NavController) {
             TaskList(tasks, navController)
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyComposable() {
+
+    val navController = TestNavHostController(LocalContext.current)
+
+    TasksScreen(navController = navController)
 }
 

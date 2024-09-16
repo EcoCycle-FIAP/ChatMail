@@ -35,10 +35,7 @@ fun ExpandedEmailFooter(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            DefaultButton(containerColor = R.color.chatmail_lightgray_color,
-                contentColor = R.color.chatmail_gray_color,
-                width = 160,
-                height = 50,
+            DefaultButton(
                 onClick = { navController.navigate("tasks") },
                 content = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -49,9 +46,13 @@ fun ExpandedEmailFooter(navController: NavController) {
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = "Gerar Tarefa")
                     }
-                })
-            DefaultButton(width = 160,
+                },
+                width = 160,
                 height = 50,
+                containerColor = R.color.chatmail_lightgray_color,
+                contentColor = R.color.chatmail_gray_color
+            )
+            DefaultButton(
                 onClick = { navController.navigate("chat") },
                 content = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -62,7 +63,10 @@ fun ExpandedEmailFooter(navController: NavController) {
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = "Responder")
                     }
-                })
+                },
+                width = 160,
+                height = 50
+            )
         }
     }
 }

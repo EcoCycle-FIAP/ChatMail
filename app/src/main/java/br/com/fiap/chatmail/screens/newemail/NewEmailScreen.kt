@@ -10,9 +10,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.components.DefaultTextInput
 import br.com.fiap.chatmail.screens.newemail.components.NewEmailFooter
@@ -59,4 +62,15 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
         },
         bottomBar = { NewEmailFooter(navController) },
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyComposable() {
+
+    val navController = TestNavHostController(LocalContext.current)
+
+    val fakeViewModel = NewEmailScreenViewModel()
+
+    NewEmailScreen(navController = navController, newEmailScreenViewModel = fakeViewModel)
 }

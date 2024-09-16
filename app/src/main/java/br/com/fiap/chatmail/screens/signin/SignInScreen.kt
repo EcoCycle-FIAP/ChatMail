@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,9 +24,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -34,6 +38,9 @@ import br.com.fiap.chatmail.components.ChatMailLogo
 import br.com.fiap.chatmail.components.DefaultButton
 import br.com.fiap.chatmail.components.DefaultTextInput
 import br.com.fiap.chatmail.ui.theme.Inika
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.testing.TestNavHostController
+import br.com.fiap.chatmail.components.LocaWebLogo
 
 @Composable
 fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScreenViewModel) {
@@ -81,7 +88,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             ) {
                 Card(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    colors = CardDefaults.cardColors(colorResource(id = R.color.chatmail_white_color))
+                    colors = CardDefaults.cardColors(colorResource(id = R.color.background_color))
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
                     DefaultTextInput(label = "Email",
@@ -114,7 +121,8 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
                         Column {
                             Text(text = "Entrar", fontSize = 16.sp)
                         }
-                    })
+                    })// Botão vermelho da Locaweb
+
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         "Esqueceu a senha?",
@@ -122,11 +130,33 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
                             .padding(vertical = 8.dp)
                             .align(Alignment.CenterHorizontally),
                         color = colorResource(
-                            id = R.color.primary_color
+                            id = R.color.gray_locaweb
                         ),
                         fontWeight = FontWeight.Bold
                     )
                 }
+            }
+        }
+
+        //Logo locaweb
+        Row(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Powered by",
+                fontSize = 13.sp,
+                color = colorResource(id = R.color.gray_locaweb)
+            )
+
+            Box(
+                modifier = Modifier
+                    .size(width = 60.dp, height = 40.dp)
+                    .clip(RectangleShape)
+            ) {
+                LocaWebLogo()
             }
         }
 
@@ -143,7 +173,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             ) {
                 Text("Não tem uma conta ainda? ")
                 Text("Cadastre-se",
-                    color = colorResource(id = R.color.primary_color),
+                    color = colorResource(id = R.color.gray_locaweb),
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable {
                         navController.navigate("signup")
@@ -151,4 +181,15 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyComposable() {
+
+    val navController = TestNavHostController(LocalContext.current)
+
+    val fakeViewModel = SignInScreenViewModel()
+
+    SignInScreen(navController = navController, signInScreenViewModel = fakeViewModel)
 }
