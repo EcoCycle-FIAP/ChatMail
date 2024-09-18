@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,7 +36,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun FavoritesScreen(navController: NavController) {
+fun FavoritesScreen(navController: NavController, onToggleTheme: () -> Unit) {
     var emailList by remember { mutableStateOf(listOf<Email>()) }
     val coroutineScope = rememberCoroutineScope()
 
@@ -65,16 +66,17 @@ fun FavoritesScreen(navController: NavController) {
         fetchEmails()
     }
 
+
     Column(
     ) {
-        TabBar(navController = navController)
+        TabBar(navController = navController, onToggleTheme)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.chatmail_lightgray_color))
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             LazyColumn(
-                modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             ) {
                 items(emailList) { email ->
                     br.com.fiap.chatmail.screens.mailbox.components.EmailCard(
@@ -92,13 +94,4 @@ fun FavoritesScreen(navController: NavController) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-
-    val navController = TestNavHostController(LocalContext.current)
-
-    FavoritesScreen(navController = navController)
 }

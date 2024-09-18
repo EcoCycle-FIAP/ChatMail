@@ -19,14 +19,14 @@ import br.com.fiap.chatmail.screens.calendar.components.TaskList
 
 
 @Composable
-fun CalendarScreen(navController: NavController) {
+fun CalendarScreen(navController: NavController, onToggleTheme: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.background_color))
     ) {
         Column {
-            TabBar(navController = navController)
+            TabBar(navController = navController, onToggleTheme)
             CalendarHeader()
             CalendarView()
             Spacer(modifier = Modifier.height(16.dp))

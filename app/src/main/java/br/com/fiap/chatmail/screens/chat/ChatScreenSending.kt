@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,13 +42,13 @@ fun ChatScreenSending() {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 50.dp)
-            .background(colorResource(id = R.color.background_color))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(16.dp)
-                .background(color = colorResource(id = R.color.background_color)),
+                .background(MaterialTheme.colorScheme.background),
             verticalArrangement = Arrangement.SpaceBetween,
 
             ) {
@@ -72,19 +73,21 @@ fun ChatScreenSending() {
                     modifier = Modifier
                         .size(56.dp)
                         .background(
-                            colorResource(id = R.color.chatmail_lightgray_color),
+                            MaterialTheme.colorScheme.secondary,
                             RoundedCornerShape(28.dp)
                         )
                         .padding(16.dp)
                 ) {
                     // Send button placeholder
                     // You can replace it with an actual icon if needed
-                    Image(painter = painterResource(id = R.drawable.paper_clip),
+                    Image(
+                        painter = painterResource(id = R.drawable.paper_clip),
                         contentDescription = "Paper Clip",
                         modifier = Modifier
                             .clickable { }
                             .size(50.dp),
-                        colorFilter = ColorFilter.tint(colorResource(id = R.color.chatmail_gray_color)))
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
+                    )
                 }
 
                 Box(
@@ -93,14 +96,14 @@ fun ChatScreenSending() {
                         .padding(8.dp)
                         .height(56.dp)
                         .background(
-                            colorResource(id = R.color.chatmail_lightgray_color),
+                            MaterialTheme.colorScheme.secondary,
                             RoundedCornerShape(8.dp)
                         )
                 ) {
                     // Input area placeholder
                     Text(
                         text = "Digite aqui...",
-                        color = colorResource(id = R.color.chatmail_gray_color),
+                        color = MaterialTheme.colorScheme.onSecondary,
                         modifier = Modifier.padding(start = 16.dp, top = 16.dp)
                     )
                 }
@@ -108,19 +111,21 @@ fun ChatScreenSending() {
                     modifier = Modifier
                         .size(56.dp)
                         .background(
-                            color = colorResource(id = R.color.primary_color),
+                            color = MaterialTheme.colorScheme.primary,
                             RoundedCornerShape(28.dp)
                         )
                         .padding(16.dp)
                 ) {
                     // Send button placeholder
                     // You can replace it with an actual icon if needed
-                    Image(painter = painterResource(id = R.drawable.sending),
+                    Image(
+                        painter = painterResource(id = R.drawable.sending),
                         contentDescription = "Sending",
                         modifier = Modifier
                             .clickable { }
                             .size(50.dp),
-                        colorFilter = ColorFilter.tint(colorResource(id = R.color.background_color)))
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.background)
+                    )
                 }
             }
         }
@@ -147,7 +152,7 @@ fun UserInfo() {
             contentDescription = "Foto de Daniel Clemente",
             modifier = Modifier
                 .size(40.dp)
-                .background(colorResource(id = R.color.background_color), CircleShape)
+                .background(MaterialTheme.colorScheme.background, CircleShape)
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
@@ -162,12 +167,10 @@ fun UserInfo() {
 @Composable
 fun MessageCards(message: String, isSentByUser: Boolean, timestamp: String) {
     val backgroundColor =
-        if (isSentByUser) colorResource(id = R.color.primary_color) else colorResource(id = R.color.chatmail_lightgray_color)
+        if (isSentByUser) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
     val alignment = if (isSentByUser) Alignment.End else Alignment.Start
     val textColor =
-        if (isSentByUser) colorResource(id = R.color.chatmail_white_color) else colorResource(
-            id = R.color.chatmail_black_color
-        )
+        if (isSentByUser) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSecondary
 
     Column(
         horizontalAlignment = alignment, modifier = Modifier.fillMaxWidth()
@@ -177,7 +180,7 @@ fun MessageCards(message: String, isSentByUser: Boolean, timestamp: String) {
                 Text(
                     text = timestamp,
                     fontSize = 15.sp,
-                    color = colorResource(id = R.color.chatmail_gray_color),
+                    color = MaterialTheme.colorScheme.onSecondary,
                     modifier = Modifier.padding(start = 140.dp, top = 20.dp)
                 )
             }
@@ -201,7 +204,7 @@ fun MessageCards(message: String, isSentByUser: Boolean, timestamp: String) {
                     painter = painterResource(id = R.drawable.share),
                     contentDescription = "Veja mais",
                     modifier = Modifier.size(24.dp),
-                    colorFilter = if (isSentByUser) ColorFilter.tint(colorResource(id = R.color.background_color)) else null
+                    colorFilter = if (isSentByUser) ColorFilter.tint(MaterialTheme.colorScheme.background) else null
                 )
             }
         }

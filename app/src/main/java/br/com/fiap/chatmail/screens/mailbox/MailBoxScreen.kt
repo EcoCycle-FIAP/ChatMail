@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,7 +33,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun MailBoxScreen(navController: NavController) {
+fun MailBoxScreen(navController: NavController, onToggleTheme: () -> Unit) {
     var emailList by remember { mutableStateOf(listOf<Email>()) }
     val coroutineScope = rememberCoroutineScope()
 
@@ -62,14 +64,14 @@ fun MailBoxScreen(navController: NavController) {
     }
 
     Column {
-        TabBar(navController)
+        TabBar(navController, onToggleTheme)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.chatmail_lightgray_color))
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             LazyColumn(
-                modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             ) {
                 items(emailList) { email ->
                     EmailCard(
@@ -87,11 +89,4 @@ fun MailBoxScreen(navController: NavController) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-    val navController = TestNavHostController(LocalContext.current)
-    MailBoxScreen(navController = navController)
 }

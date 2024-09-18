@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -45,6 +46,7 @@ private fun generateTasks(): List<Task> {
 
     return tasks
 }
+
 @Composable
 fun TasksScreen(navController: NavController) {
     val tasks = generateTasks()
@@ -53,7 +55,7 @@ fun TasksScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 50.dp)
-            .background(colorResource(id = R.color.background_color))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier

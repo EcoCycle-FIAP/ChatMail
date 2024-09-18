@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -16,7 +17,8 @@ import br.com.fiap.chatmail.R
 fun EmailMorePopUp(
     expanded: MutableState<Boolean>, onReportSpam: () -> Unit, onDelete: () -> Unit
 ) {
-    DropdownMenu(modifier = Modifier.background(color = colorResource(id = R.color.background_color)),
+    DropdownMenu(
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
         expanded = expanded.value,
         onDismissRequest = { expanded.value = false }) {
         DropdownMenuItem(text = { Text("Reportar Spam") }, onClick = {
@@ -30,7 +32,7 @@ fun EmailMorePopUp(
         })
         DropdownMenuItem(text = {
             Text(
-                text = "Excluir", color = colorResource(id = R.color.chatmail_red_color)
+                text = "Excluir", color = MaterialTheme.colorScheme.onError
             )
         }, onClick = {
             onDelete()
@@ -39,7 +41,7 @@ fun EmailMorePopUp(
             Icon(
                 painter = painterResource(id = R.drawable.baseline_delete_24),
                 contentDescription = "Ícone de uma lixeira",
-                tint = colorResource(id = R.color.chatmail_red_color)
+                tint = MaterialTheme.colorScheme.onError
             )
         })
     }
