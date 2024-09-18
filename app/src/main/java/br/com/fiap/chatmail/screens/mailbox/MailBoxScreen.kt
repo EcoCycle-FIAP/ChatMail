@@ -21,53 +21,35 @@ import androidx.navigation.NavController
 import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.components.TabBar
+import br.com.fiap.chatmail.models.Email
 import br.com.fiap.chatmail.screens.mailbox.components.EmailCard
 import br.com.fiap.chatmail.screens.mailbox.components.NewEmailButton
+import br.com.fiap.chatmail.services.EmailService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-
-// Data model for email
-data class Email(
-    val id: String,
-    val sender: String,
-    val subject: String,
-    val body: String,
-    val timestamp: String
-)
-
-// API service definition
-interface EmailApiService {
-    @GET("emails/list")
-    fun listEmails(): retrofit2.Call<List<Email>>
-}
 
 @Composable
 fun MailBoxScreen(navController: NavController) {
     var emailList by remember { mutableStateOf(listOf<Email>()) }
     val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
 
-    // Function to fetch emails from API
     fun fetchEmails() {
         coroutineScope.launch(Dispatchers.IO) {
             try {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.exemplo.com/") // Replace with your API URL
+                    .baseUrl("https://api.exemplo.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-                val emailApiService = retrofit.create(EmailApiService::class.java)
+                val emailApiService = retrofit.create(EmailService::class.java)
                 val response = emailApiService.listEmails().execute()
 
                 if (response.isSuccessful) {
                     response.body()?.let {
                         emailList = it
                     }
-                } else {
-                    // Handle error (optional Toast or Log)
                 }
             } catch (e: Exception) {
                 // Handle exception (optional Toast or Log)
@@ -75,7 +57,6 @@ fun MailBoxScreen(navController: NavController) {
         }
     }
 
-    // Call fetchEmails when the screen is initialized
     LaunchedEffect(Unit) {
         fetchEmails()
     }
@@ -90,11 +71,11 @@ fun MailBoxScreen(navController: NavController) {
             LazyColumn(
                 modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
             ) {
-                // Display email items from API
                 items(emailList) { email ->
                     EmailCard(
                         email = email,
-                        navController = navController
+                        navController = navController,
+                        iteration = emailList.indexOf(email)
                     )
                 }
             }
@@ -104,24 +85,6 @@ fun MailBoxScreen(navController: NavController) {
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 25.dp)
             )
-        }
-    }
-}
-
-// Updated EmailCard to take Email object
-@Composable
-fun EmailCard(email: Email, navController: NavController) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(colorResource(id = R.color.chatmail_lightgray_color))
-            .padding(16.dp)
-    ) {
-        Column {
-            Text(text = "De: ${email.sender}", fontWeight = FontWeight.Bold)
-            Text(text = "Assunto: ${email.subject}")
-            Text(text = "Corpo: ${email.body}", maxLines = 2)
-            Text(text = "Recebido: ${email.timestamp}")
         }
     }
 }

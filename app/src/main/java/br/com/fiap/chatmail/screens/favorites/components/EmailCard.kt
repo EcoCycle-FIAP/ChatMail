@@ -23,10 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.chatmail.R
+import br.com.fiap.chatmail.models.Email
 import br.com.fiap.chatmail.ui.theme.Jaldi
 
 @Composable
-fun EmailCard(iteration: Int, navController: NavController) {
+fun EmailCard(iteration: Int, navController: NavController, email: Email) {
 
     //Lógica para simular diferentes cores de avatares
     var avatarColor = R.color.primary_color
@@ -60,13 +61,13 @@ fun EmailCard(iteration: Int, navController: NavController) {
             }
             Column(Modifier.weight(0.55f)) {
                 Text(
-                    text = "Nome do Usuário",
+                    text = email.sender,
                     fontSize = 18.sp,
                     fontFamily = Jaldi,
                     lineHeight = 10.sp
                 )
                 Text(
-                    text = "Assunto do Email",
+                    text = email.subject,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = Jaldi
@@ -78,7 +79,7 @@ fun EmailCard(iteration: Int, navController: NavController) {
                 modifier = Modifier.weight(0.25f)
             ) {
                 Text(
-                    text = "XXt atrás",
+                    text = email.timestamp,
                     fontSize = 16.sp,
                     fontFamily = Jaldi,
                     color = colorResource(id = R.color.chatmail_gray_color),
@@ -92,7 +93,7 @@ fun EmailCard(iteration: Int, navController: NavController) {
             }
         }
         Text(
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis semper nibh, eget tincidunt nunc convallis vel. Cras feugiat erat vitae efficitur hendrerit. Aenean tristique ex posuere ligula accumsan ultrices. Ut suscipit justo orci, sit amet pulvinar ipsum pharetra quis.",
+            text = email.body,
             fontFamily = Jaldi,
             color = colorResource(
                 id = R.color.chatmail_gray_color
