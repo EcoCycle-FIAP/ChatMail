@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,16 +24,16 @@ import br.com.fiap.chatmail.screens.signup.SignUpScreen
 import br.com.fiap.chatmail.screens.signup.SignUpScreenViewModel
 
 @Composable
-fun MailBoxScreen(navController: NavController) {
+fun MailBoxScreen(navController: NavController, onToggleTheme: () -> Unit) {
     Column {
-        TabBar(navController)
+        TabBar(navController, onToggleTheme)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.chatmail_lightgray_color))
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             LazyColumn(
-                modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             ) {
                 items(10) {
                     EmailCard(iteration = it, navController = navController)
@@ -41,13 +42,4 @@ fun MailBoxScreen(navController: NavController) {
             NewEmailButton(navController = navController, modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 25.dp))
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-
-    val navController = TestNavHostController(LocalContext.current)
-
-    MailBoxScreen(navController = navController)
 }

@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -50,18 +51,18 @@ val listOfNavItems = listOf(
 )
 
 @Composable
-fun TabBar(navController: NavController) {
+fun TabBar(navController: NavController, onToggleTheme: () -> Unit) {
 
     Surface(
         modifier = Modifier
             .padding(top = 50.dp)
-            .background(color = colorResource(id = R.color.background_color))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column {
-            UserHeader()
+            UserHeader(onToggleTheme)
             Spacer(modifier = Modifier.height(15.dp))
             NavigationBar(
-                containerColor = colorResource(id = R.color.chatmail_white_color),
+                containerColor = MaterialTheme.colorScheme.background,
                 modifier = Modifier.height(100.dp)
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -91,7 +92,7 @@ fun TabBar(navController: NavController) {
                                 contentDescription = null,
                             )
                             HorizontalDivider(
-                                color = if (selected) colorResource(id = R.color.primary_color) else colorResource(
+                                color = if (selected) MaterialTheme.colorScheme.primary else colorResource(
                                     id = R.color.transparent
                                 ),
                                 thickness = 4.dp,

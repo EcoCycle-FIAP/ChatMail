@@ -41,8 +41,6 @@ import br.com.fiap.chatmail.components.ChatMailLogo
 import br.com.fiap.chatmail.components.DefaultButton
 import br.com.fiap.chatmail.components.DefaultTextInput
 import br.com.fiap.chatmail.components.LocaWebLogo
-import br.com.fiap.chatmail.screens.signin.SignInScreen
-import br.com.fiap.chatmail.screens.signin.SignInScreenViewModel
 import br.com.fiap.chatmail.ui.theme.Inika
 
 @Composable

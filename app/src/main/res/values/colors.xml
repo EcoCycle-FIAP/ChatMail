@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background_color">#FFFFFFFF</color>
-    <color name="primary_color">#FFFF0000</color>
+    <color name="primary_color">#FFED2350</color>
+    <color name="red_800">#FFB40E48</color>
     <color name="input_background">#FFEDEDED</color>
     <color name="modal_background">#FFF6F6F6</color>
-    <color name="gray_locaweb">#FF333333</color>
+    <color name="gray_locaweb">#FF253746</color>
     <color name="chatmail_lightgray_color">#FFF4F4F4</color>
     <color name="chatmail_green_color">#FF008D52</color>
     <color name="chatmail_cyan_color">#FF00748D</color>
