@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,7 +34,7 @@ fun ExpanedEmailHeader(navController: NavController) {
     Row(
         modifier = Modifier
             .padding(top = 50.dp)
-            .background(color = colorResource(id = R.color.background_color))
+            .background(MaterialTheme.colorScheme.background)
             .fillMaxWidth()
             .height(70.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -47,13 +48,13 @@ fun ExpanedEmailHeader(navController: NavController) {
         ) {
             Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Seta para esquerda, indicando ação de 'voltar'",
-                tint = colorResource(id = R.color.chatmail_gray_color),
+                tint = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .size(30.dp)
                     .clickable { navController.popBackStack() })
             Icon(painter = painterResource(id = R.drawable.baseline_more_horiz_24),
                 contentDescription = "Três pontos horizontais, indicando ação de 'mais'",
-                tint = colorResource(id = R.color.chatmail_gray_color),
+                tint = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier
                     .size(35.dp)
                     .clickable { isPopupExpanded = true })

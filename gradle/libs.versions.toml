@@ -14,6 +14,8 @@ ojdbc8 = "19.9.0.0"
 retrofit = "2.9.0"
 runtimeLivedata = "1.6.8"
 navigationTesting = "2.8.0"
+retrofit = "2.9.0"
+gson = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,10 +36,11 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
+
 ojdbc8 = { module = "com.oracle.database.jdbc:ojdbc8", version.ref = "ojdbc8" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

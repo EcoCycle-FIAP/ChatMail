@@ -6,7 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -17,25 +25,65 @@ import androidx.navigation.NavController
 import androidx.navigation.testing.TestNavHostController
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.components.TabBar
+import br.com.fiap.chatmail.models.Email
 import br.com.fiap.chatmail.screens.favorites.components.EmailCard
 import br.com.fiap.chatmail.screens.favorites.components.NewEmailButton
 import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
+import br.com.fiap.chatmail.services.EmailService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun FavoritesScreen(navController: NavController) {
+fun FavoritesScreen(navController: NavController, onToggleTheme: () -> Unit) {
+    var emailList by remember { mutableStateOf(listOf<Email>()) }
+    val coroutineScope = rememberCoroutineScope()
+
+    fun fetchEmails() {
+        coroutineScope.launch(Dispatchers.IO) {
+            try {
+                val retrofit = Retrofit.Builder()
+                    .baseUrl("https://api.exemplo.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                val emailApiService = retrofit.create(EmailService::class.java)
+                val response = emailApiService.listFavoritedEmails().execute()
+
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        emailList = it
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle exception (optional Toast or Log)
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        fetchEmails()
+    }
+
+
     Column(
     ) {
-        TabBar(navController = navController)
+        TabBar(navController = navController, onToggleTheme)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.chatmail_lightgray_color))
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             LazyColumn(
-                modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             ) {
-                items(4) {
-                    EmailCard(iteration = it, navController = navController)
+                items(emailList) { email ->
+                    br.com.fiap.chatmail.screens.mailbox.components.EmailCard(
+                        email = email,
+                        navController = navController,
+                        iteration = emailList.indexOf(email)
+                    )
                 }
             }
             NewEmailButton(
@@ -46,13 +94,4 @@ fun FavoritesScreen(navController: NavController) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-
-    val navController = TestNavHostController(LocalContext.current)
-
-    FavoritesScreen(navController = navController)
 }
