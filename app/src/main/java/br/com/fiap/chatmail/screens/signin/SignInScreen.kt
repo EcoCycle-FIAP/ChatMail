@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,7 +52,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.background_color))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -88,7 +89,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             ) {
                 Card(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    colors = CardDefaults.cardColors(colorResource(id = R.color.background_color))
+                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.background)
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
                     DefaultTextInput(label = "Email",
@@ -129,9 +130,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                             .align(Alignment.CenterHorizontally),
-                        color = colorResource(
-                            id = R.color.gray_locaweb
-                        ),
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -148,7 +147,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             Text(
                 text = "Powered by",
                 fontSize = 13.sp,
-                color = colorResource(id = R.color.gray_locaweb)
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             Box(
@@ -173,7 +172,7 @@ fun SignInScreen(navController: NavController, signInScreenViewModel: SignInScre
             ) {
                 Text("Não tem uma conta ainda? ")
                 Text("Cadastre-se",
-                    color = colorResource(id = R.color.gray_locaweb),
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable {
                         navController.navigate("signup")

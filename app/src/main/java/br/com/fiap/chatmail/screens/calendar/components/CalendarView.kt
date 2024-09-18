@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,7 +31,7 @@ fun CalendarView() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(colorResource(id = R.color.chatmail_lightgray_color))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -43,7 +44,7 @@ fun CalendarView() {
                         .weight(1f)
                         .padding(horizontal = 23.dp, vertical = 7.dp),
                     fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.chatmail_black_color),
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 20.sp
                 )
             }
@@ -63,13 +64,13 @@ fun CalendarView() {
                                 .weight(1f)
                                 .aspectRatio(1f)
                                 .padding(4.dp)
-                                .background(colorResource(id = R.color.background_color)),
+                                .background(MaterialTheme.colorScheme.background),
                             contentAlignment = Alignment.Center
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(
                                     text = daysInMonth[dayIndex].toString(),
-                                    color = colorResource(id = R.color.chatmail_black_color),
+                                    color = MaterialTheme.colorScheme.onBackground,
                                     fontWeight = if (isToday) FontWeight.Bold else FontWeight.Normal,
                                     modifier = Modifier.padding(bottom = if (isToday) 1.dp else 0.dp)
                                 )
@@ -79,7 +80,7 @@ fun CalendarView() {
                                         modifier = Modifier
                                             .height(2.dp)
                                             .width(20.dp)
-                                            .background(colorResource(id = R.color.chatmail_gray_color))
+                                            .background(MaterialTheme.colorScheme.background)
                                     )
                                 }
                             }

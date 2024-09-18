@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +34,7 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
-                    .background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                    .background(MaterialTheme.colorScheme.background)
                     .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DefaultTextInput(

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +29,7 @@ fun ExpandedEmailFooter(navController: NavController) {
         Row(
             modifier = Modifier
                 .padding(top = 50.dp)
-                .background(color = colorResource(id = R.color.background_color))
+                .background(MaterialTheme.colorScheme.background)
                 .fillMaxWidth()
                 .height(86.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,

@@ -22,7 +22,7 @@ enum class Screens {
 }
 
 @Composable
-fun NavigationCenter() {
+fun NavigationCenter(onToggleTheme: () -> Unit) {
     val navController = rememberNavController()
 
 
@@ -38,13 +38,13 @@ fun NavigationCenter() {
             )
         }
         composable(route = Screens.Calendar.name) {
-            CalendarScreen(navController)
+            CalendarScreen(navController, onToggleTheme)
         }
         composable(route = Screens.MailBox.name) {
-            MailBoxScreen(navController)
+            MailBoxScreen(navController, onToggleTheme)
         }
         composable(route = Screens.Favorites.name) {
-            FavoritesScreen(navController)
+            FavoritesScreen(navController, onToggleTheme)
         }
         composable(route = Screens.Tasks.name) {
             TasksScreen(navController)

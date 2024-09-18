@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,17 +23,17 @@ import br.com.fiap.chatmail.screens.favorites.components.NewEmailButton
 import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
 
 @Composable
-fun FavoritesScreen(navController: NavController) {
+fun FavoritesScreen(navController: NavController, onToggleTheme: () -> Unit) {
     Column(
     ) {
-        TabBar(navController = navController)
+        TabBar(navController = navController, onToggleTheme)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.chatmail_lightgray_color))
+                .background(MaterialTheme.colorScheme.secondary)
         ) {
             LazyColumn(
-                modifier = Modifier.background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             ) {
                 items(4) {
                     EmailCard(iteration = it, navController = navController)
@@ -46,13 +47,4 @@ fun FavoritesScreen(navController: NavController) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-
-    val navController = TestNavHostController(LocalContext.current)
-
-    FavoritesScreen(navController = navController)
 }
