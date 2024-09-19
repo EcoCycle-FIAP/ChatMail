@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.chatmail.R
-import br.com.fiap.chatmail.models.Email
+import br.com.fiap.chatmail.backend.model.Email
 import br.com.fiap.chatmail.ui.theme.Jaldi
 
 @Composable
@@ -36,6 +36,7 @@ fun EmailCard(iteration: Int, navController: NavController, email: Email) {
         0, 2 -> {
             avatarColor = R.color.chatmail_red_color
         }
+
         1, 3 -> {
             avatarColor = R.color.chatmail_green_color
         }
@@ -93,12 +94,13 @@ fun EmailCard(iteration: Int, navController: NavController, email: Email) {
             }
         }
         Text(
-            text = email.message,
-            fontFamily = Jaldi,
-            color = colorResource(
+            text = email.message, fontFamily = Jaldi, color = colorResource(
                 id = R.color.chatmail_gray_color
             )
         )
     }
-    HorizontalDivider(color = colorResource(id = R.color.chatmail_gray_color), modifier = Modifier.padding(horizontal = 25.dp))
+    HorizontalDivider(
+        color = colorResource(id = R.color.chatmail_gray_color),
+        modifier = Modifier.padding(horizontal = 25.dp)
+    )
 }
