@@ -4,13 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +30,7 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
     val to by newEmailScreenViewModel.to.observeAsState(initial = "")
     val subject by newEmailScreenViewModel.subject.observeAsState(initial = "")
     val message by newEmailScreenViewModel.message.observeAsState(initial = "")
+    val error by newEmailScreenViewModel.error.observeAsState()
 
     Scaffold(
         topBar = { NewEmailHeader(navController) },
@@ -34,8 +38,9 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
-                    .background(MaterialTheme.colorScheme.background)
-                    .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
+                    .background(color = colorResource(id = R.color.chatmail_lightgray_color))
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DefaultTextInput(
                     value = to,
@@ -63,15 +68,4 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
         },
         bottomBar = { NewEmailFooter(navController) },
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMyComposable() {
-
-    val navController = TestNavHostController(LocalContext.current)
-
-    val fakeViewModel = NewEmailScreenViewModel()
-
-    NewEmailScreen(navController = navController, newEmailScreenViewModel = fakeViewModel)
 }

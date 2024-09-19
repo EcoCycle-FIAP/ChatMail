@@ -7,7 +7,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.15.12:3000/"
+    private const val BASE_URL = "http://localhost:3000/"
 
     val instance: ApiService by lazy {
         val retrofit = Retrofit.Builder()

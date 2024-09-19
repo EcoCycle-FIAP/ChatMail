@@ -16,6 +16,7 @@ navigationTesting = "2.8.0"
 retrofit = "2.9.0"
 gson = "2.9.0"
 constraintlayout = "2.1.4"
+javamail = "1.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +37,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
+javamail = { group = "com.sun.mail", name = "javax.mail", version.ref = "javamail" }
 
 ojdbc8 = { module = "com.oracle.database.jdbc:ojdbc8", version.ref = "ojdbc8" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
