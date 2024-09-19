@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.material3.MaterialTheme
@@ -27,40 +28,40 @@ import br.com.fiap.chatmail.models.Email
 import br.com.fiap.chatmail.screens.mailbox.components.EmailCard
 import br.com.fiap.chatmail.screens.mailbox.components.NewEmailButton
 import br.com.fiap.chatmail.services.EmailService
+import br.com.fiap.consultacep.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
 fun MailBoxScreen(navController: NavController, onToggleTheme: () -> Unit) {
-    var emailList by remember { mutableStateOf(listOf<Email>()) }
+    // Scope para gerenciar as coroutines
     val coroutineScope = rememberCoroutineScope()
 
-    fun fetchEmails() {
+    // Estado para armazenar a lista de e-mails
+    var emailList by remember { mutableStateOf<List<Email>>(emptyList()) }
+
+    // Chamada assíncrona para buscar os e-mails quando a tela é composta
+    LaunchedEffect(Unit) {
         coroutineScope.launch(Dispatchers.IO) {
+            val call = RetrofitFactory().getEmailService().listEmails()
             try {
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.exemplo.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-
-                val emailApiService = retrofit.create(EmailService::class.java)
-                val response = emailApiService.listEmails().execute()
-
+                val response = call.execute()
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        emailList = it
+                    response.body()?.let { emails ->
+                        emailList = emails // Atualiza a lista de e-mails no estado
                     }
+                } else {
+                    // Lidar com erro, exibir uma mensagem, etc.
                 }
             } catch (e: Exception) {
-                // Handle exception (optional Toast or Log)
+                // Lidar com exceção, exibir uma mensagem de erro, etc.
             }
         }
-    }
-
-    LaunchedEffect(Unit) {
-        fetchEmails()
     }
 
     Column {
@@ -70,17 +71,34 @@ fun MailBoxScreen(navController: NavController, onToggleTheme: () -> Unit) {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.secondary)
         ) {
-            LazyColumn(
-                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
-            ) {
-                items(emailList) { email ->
-                    EmailCard(
-                        email = email,
-                        navController = navController,
-                        iteration = emailList.indexOf(email)
+            // Verifica se a lista não está vazia antes de renderizar
+            if (emailList.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
+                ) {
+                    items(emailList) { email ->
+                        EmailCard(
+                            email = email,
+                            navController = navController,
+                            iteration = emailList.indexOf(email)
+                        )
+                    }
+                }
+            } else {
+                // Exibe um texto caso a lista esteja vazia ou durante o carregamento
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Carregando emails...",
+                        color = MaterialTheme.colorScheme.onSecondary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }
+
+            // Botão para compor novo email
             NewEmailButton(
                 navController = navController,
                 modifier = Modifier

@@ -61,7 +61,7 @@ fun EmailCard(iteration: Int, navController: NavController, email: Email) {
             }
             Column(Modifier.weight(0.55f)) {
                 Text(
-                    text = email.sender,
+                    text = email.senderEmailAddress,
                     fontSize = 18.sp,
                     fontFamily = Jaldi,
                     lineHeight = 10.sp
@@ -79,7 +79,7 @@ fun EmailCard(iteration: Int, navController: NavController, email: Email) {
                 modifier = Modifier.weight(0.25f)
             ) {
                 Text(
-                    text = email.timestamp,
+                    text = "",
                     fontSize = 16.sp,
                     fontFamily = Jaldi,
                     color = colorResource(id = R.color.chatmail_gray_color),
@@ -93,7 +93,7 @@ fun EmailCard(iteration: Int, navController: NavController, email: Email) {
             }
         }
         Text(
-            text = email.body,
+            text = email.message,
             fontFamily = Jaldi,
             color = colorResource(
                 id = R.color.chatmail_gray_color

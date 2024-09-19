@@ -21,6 +21,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.widget.ConstraintLayout
 import br.com.fiap.chatmail.R
 import br.com.fiap.chatmail.screens.settings.components.SettingPopup
 import br.com.fiap.chatmail.ui.theme.Jaldi

@@ -5,9 +5,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface EmailService {
-    @GET("emails/list")
+    @GET("emails")
     fun listEmails(): Call<List<Email>>
 
-    @GET("emails/favoritos")
+    @GET("emails")
     fun listFavoritedEmails(): Call<List<Email>>
 }
