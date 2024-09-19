@@ -1,9 +1,8 @@
 package br.com.fiap.chatmail.models
 
 data class Email(
-    val id: String,
-    val sender: String,
-    val subject: String,
-    val body: String,
-    val timestamp: String
+    val senderEmailAddress: String = "",
+    val recipientEmailAddress: String = "",
+    val subject: String = "",
+    val message: String = ""
 )
