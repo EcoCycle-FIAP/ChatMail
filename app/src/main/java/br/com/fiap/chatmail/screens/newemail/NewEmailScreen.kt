@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -41,6 +42,7 @@ fun NewEmailScreen(navController: NavController, newEmailScreenViewModel: NewEma
     val to by newEmailScreenViewModel.to.observeAsState(initial = "")
     val subject by newEmailScreenViewModel.subject.observeAsState(initial = "")
     val message by newEmailScreenViewModel.message.observeAsState(initial = "")
+    val error by newEmailScreenViewModel.error.observeAsState()
 
     Scaffold(
         topBar = { NewEmailHeader(navController) },
@@ -140,3 +142,4 @@ fun PreviewMyComposable() {
 
     NewEmailScreen(navController = navController, newEmailScreenViewModel = fakeViewModel)
 }
+
