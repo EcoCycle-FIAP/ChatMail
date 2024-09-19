@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.chatmail.R
-import br.com.fiap.chatmail.models.Email
+import br.com.fiap.chatmail.backend.model.Email
 import br.com.fiap.chatmail.ui.theme.Jaldi
 
 @Composable
