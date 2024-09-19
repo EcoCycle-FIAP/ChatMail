@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -30,6 +32,7 @@ import br.com.fiap.chatmail.screens.favorites.components.EmailCard
 import br.com.fiap.chatmail.screens.favorites.components.NewEmailButton
 import br.com.fiap.chatmail.screens.mailbox.MailBoxScreen
 import br.com.fiap.chatmail.services.EmailService
+import br.com.fiap.consultacep.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -37,35 +40,30 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
 fun FavoritesScreen(navController: NavController, onToggleTheme: () -> Unit) {
-    var emailList by remember { mutableStateOf(listOf<Email>()) }
+    // Scope para gerenciar as coroutines
     val coroutineScope = rememberCoroutineScope()
 
-    fun fetchEmails() {
+    // Estado para armazenar a lista de e-mails
+    var emailList by remember { mutableStateOf<List<Email>>(emptyList()) }
+
+    // Chamada assíncrona para buscar os e-mails quando a tela é composta
+    LaunchedEffect(Unit) {
         coroutineScope.launch(Dispatchers.IO) {
+            val call = RetrofitFactory().getEmailService().listFavoritedEmails()
             try {
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.exemplo.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-
-                val emailApiService = retrofit.create(EmailService::class.java)
-                val response = emailApiService.listFavoritedEmails().execute()
-
+                val response = call.execute()
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        emailList = it
+                    response.body()?.let { emails ->
+                        emailList = emails // Atualiza a lista de e-mails no estado
                     }
+                } else {
+                    // Lidar com erro, exibir uma mensagem, etc.
                 }
             } catch (e: Exception) {
-                // Handle exception (optional Toast or Log)
+                // Lidar com exceção, exibir uma mensagem de erro, etc.
             }
         }
     }
-
-    LaunchedEffect(Unit) {
-        fetchEmails()
-    }
-
 
     Column(
     ) {
